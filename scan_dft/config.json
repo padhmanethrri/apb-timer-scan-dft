@@ -1,0 +1,16 @@
+{
+  "DESIGN_NAME": "apb_timer_top",
+  "VERILOG_FILES": [
+    "dir::apb_master.v",
+    "dir::apb_timer.v",
+    "dir::apb_timer_top.v"
+  ],
+  "CLOCK_PORT": "pclk",
+  "CLOCK_PERIOD": 12,
+  "DESIGN_IS_CORE": false,
+  "FP_SIZING": "relative",
+  "FP_CORE_UTIL": 35,
+  "PL_TARGET_DENSITY_PCT": 40,
+  "PDK": "sky130A",
+  "STD_CELL_LIBRARY": "sky130_fd_sc_hd"
+}
