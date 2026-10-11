@@ -1,0 +1,17 @@
+APB Timer with Scan DFT — Synthesis Comparison
+Yosys version: 0.52
+
+Metric                         Baseline    Scan-enabled
+Total generic cells            361         437
+Flip-flops                     126         126
+Generic multiplexers            55         104
+Generic AND gates               10          19
+Structural check problems        0           0
+
+Generic cell-count overhead: 21.05%
+
+Notes:
+- Both designs synthesized with the same Yosys version and flow.
+- Scan functionality passed the simulation testbench.
+- Generic cell counts are not physical area measurements.
+- Power, timing, and ATPG results have not been measured.

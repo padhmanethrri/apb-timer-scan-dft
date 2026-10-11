@@ -1,0 +1,34 @@
+APB Timer with Scan-Based DFT — Final Results
+
+Technology: Sky130A
+Standard-cell library: sky130_fd_sc_hd
+Flow: LibreLane Classic
+Clock period: 12 ns (~83.33 MHz)
+
+Functional verification:
+- Scan-enabled testbench: PASS
+- Original RTL and testbench preserved separately
+
+Physical design:
+- RTL-to-GDS flow: COMPLETED
+- Final GDS: /work/scan_dft/runs/apb_timer_scan_12ns/final/gds/apb_timer_top.gds
+- GDS size: 1.4 MB
+- DRC: PASS
+- LVS: PASS
+- Antenna check: PASS
+
+Post-route timing:
+- Worst setup slack across reported corners: +1.5522 ns
+- Setup violations: 0
+- Worst hold slack: +0.1105 ns
+- Hold violations: 0
+- Maximum capacitance violations: 0
+- Maximum-slew warnings remain
+
+Power:
+- Earlier 10 ns run estimated 2.002 mW at nominal corner.
+- Recheck power for the final 12 ns run before reporting it as the final value.
+
+Not yet completed:
+- ATPG and fault-coverage analysis
+- Final comparable baseline-versus-scan area overhead
