@@ -1,5 +1,4 @@
 
-`timescale 1ns/1ps
 
 module tb_apb_timer;
 
@@ -14,7 +13,6 @@ module tb_apb_timer;
     wire [31:0] read_data;
     integer errors;
 
-    // Design under test
     apb_timer_top dut (
         .pclk(pclk),
         .presetn(presetn),
@@ -26,17 +24,15 @@ module tb_apb_timer;
         .read_data(read_data)
     );
 
-    // 10 ns clock period
+
     initial pclk = 0;
     always #5 pclk = ~pclk;
 
-    // Waveform generation
     initial begin
         $dumpfile("results/timer.vcd");
         $dumpvars(0, tb_apb_timer);
     end
 
-    // APB write transaction
     task apb_write;
         input [7:0] address;
         input [31:0] value;
@@ -58,7 +54,6 @@ module tb_apb_timer;
         end
     endtask
 
-    // APB read transaction
     task apb_read;
         input [7:0] address;
         input [31:0] expected;
@@ -91,7 +86,6 @@ module tb_apb_timer;
         end
     endtask
 
-    // Main test sequence
     initial begin
         errors = 0;
 
@@ -102,35 +96,28 @@ module tb_apb_timer;
         addr_in = 0;
         data_in = 0;
 
-        // Initial reset
+ 
         repeat (3) @(negedge pclk);
         presetn = 1;
 
-        // Test 1: LOAD register write and readback
         apb_write(8'h04, 5);
         apb_read(8'h04, 5);
 
-        // STATUS should be zero before starting
         apb_read(8'h0C, 0);
 
-        // Start timer in one-shot mode
+ 
         apb_write(8'h00, 1);
 
-        // Allow countdown to finish
         repeat (8) @(negedge pclk);
 
-        // Check timer completion
         apb_read(8'h08, 0);
         apb_read(8'h0C, 1);
 
-        // Test 2: One-shot mode stops at zero
-        // CTRL enable bit should clear automatically
         apb_read(8'h00, 0);
 
         repeat (5) @(negedge pclk);
         apb_read(8'h08, 0);
 
-        // Test 3: Back-to-back register accesses
         apb_write(8'h04, 3);
         apb_read(8'h04, 3);
 
@@ -140,11 +127,10 @@ module tb_apb_timer;
         apb_write(8'h04, 200);
         apb_read(8'h04, 200);
 
-        // COUNT is read-only; writes must be ignored
         apb_write(8'h08, 55);
         apb_read(8'h08, 0);
 
-        // Test 4: Reload mode
+
         apb_write(8'h04, 3);
         apb_write(8'h00, 3);
 
